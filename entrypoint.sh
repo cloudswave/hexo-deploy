@@ -35,15 +35,19 @@ echo "Deploy to ${PRO_REPOSITORY}"
 # Directs the action to the the Github workspace.
 cd $GITHUB_WORKSPACE 
 
-echo "npm install ..." 
-npm install
+# Don't npm install and hexo generate if HEXO_GEN is false, default generate 
+if [ "${HEXO_GEN}" = "false" ]; then
+    echo "HEXO_GEN is false, Don't npm install and hexo generate!!!"
+else
+    echo "npm install ..." 
+    npm install
 
+    echo "Clean folder ..."
+    ./node_modules/hexo/bin/hexo clean
 
-echo "Clean folder ..."
-./node_modules/hexo/bin/hexo clean
-
-echo "Generate file ..."
-./node_modules/hexo/bin/hexo generate
+    echo "Generate file ..."
+    ./node_modules/hexo/bin/hexo generate
+fi
 
 echo "copy CNAME if exists"
 if [ -n "${CNAME}" ]; then

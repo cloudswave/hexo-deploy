@@ -64,6 +64,7 @@ jobs:
     - name: Build and Deploy
       uses: solybum/hexo-deploy@master
       env:
+        HEXO_GEN: false # Don't npm install and hexo generate if HEXO_GEN is false
         PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_REPOSITORY: solybum/solybum.github.io # The repository the action should deploy to.
         BRANCH: master  # The branch the action should deploy to.
@@ -91,4 +92,5 @@ Below you'll find a description of what each option does.
 | `PUBLISH_REPOSITORY`  | The repository the action should deploy to. for example `solybum/solybum.github.io` | `env` | **Yes** |
 | `BRANCH`  | The branch the action should deploy to. for example `master` | `env` | **Yes** |
 | `PUBLISH_DIR`  | The folder the action should deploy. for example `./public`| `env` | **Yes** |
+| `HEXO_GEN`  | Don't npm install and hexo generate if HEXO_GEN is false, default generate | `env` | **No** |
 
